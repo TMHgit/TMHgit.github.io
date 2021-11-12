@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="TMH">
+  <meta name="keywords" content="">
+  
+  <title>常用数据结构之字典 - TMH个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tmhgit.github.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="常用数据结构之字典">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-12 21:48" pubdate>
+        2021年11月12日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      41
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">常用数据结构之字典</h1>
+            
+            <div class="markdown-body">
+              <h2 id="第015课：常用数据结构之字典"><a href="#第015课：常用数据结构之字典" class="headerlink" title="第015课：常用数据结构之字典"></a>第015课：常用数据结构之字典</h2><p>迄今为止，我们已经为大家介绍了Python中的三种容器型数据类型，但是这些数据类型还不足以帮助我们解决所有的问题。例如，我们要保存一个人的信息，包括姓名、年龄、体重、单位地址、家庭住址、本人手机号、紧急联系人手机号等信息，你会发现我们之前学过的列表、元组和集合都不是最理想的选择。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">person1 = [<span class="string">&#x27;王大锤&#x27;</span>, <span class="number">55</span>, <span class="number">60</span>, <span class="string">&#x27;科华北路62号&#x27;</span>, <span class="string">&#x27;中同仁路8号&#x27;</span>, <span class="string">&#x27;13122334455&#x27;</span>, <span class="string">&#x27;13800998877&#x27;</span>]</span><br><span class="line">person2 = (<span class="string">&#x27;王大锤&#x27;</span>, <span class="number">55</span>, <span class="number">60</span>, <span class="string">&#x27;科华北路62号&#x27;</span>, <span class="string">&#x27;中同仁路8号&#x27;</span>, <span class="string">&#x27;13122334455&#x27;</span>, <span class="string">&#x27;13800998877&#x27;</span>)</span><br><span class="line">person3 = &#123;<span class="string">&#x27;王大锤&#x27;</span>, <span class="number">55</span>, <span class="number">60</span>, <span class="string">&#x27;科华北路62号&#x27;</span>, <span class="string">&#x27;中同仁路8号&#x27;</span>, <span class="string">&#x27;13122334455&#x27;</span>, <span class="string">&#x27;13800998877&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>集合肯定是最不合适的，因为集合有去重特性，如果一个人的年龄和体重相同，那么集合中就会少一项信息；同理，如果这个人的家庭住址和单位地址是相同的，那么集合中又会少一项信息。另一方面，虽然列表和元组可以把一个人的所有信息都保存下来，但是当你想要获取这个人的手机号时，你得先知道他的手机号是列表或元组中的第6个还是第7个元素；当你想获取一个人的家庭住址时，你还得知道家庭住址是列表或元组中的第几项。总之，在遇到上述的场景时，列表、元组、字典都不是最合适的选择，我们还需字典（dictionary）类型，这种数据类型最适合把相关联的信息组装到一起，并且可以帮助我们解决程序中为真实事物建模的问题。</p>
+<p>说到字典这个词，大家一定不陌生，读小学的时候每个人基本上都有一本《新华字典》，如下图所示。</p>
+<p><img src="res/dictionary.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>Python程序中的字典跟现实生活中的字典很像，它以键值对（键和值的组合）的方式把数据组织到一起，我们可以通过键找到与之对应的值并进行操作。就像《新华字典》中，每个字（键）都有与它对应的解释（值）一样，每个字和它的解释合在一起就是字典中的一个条目，而字典中通常包含了很多个这样的条目。</p>
+<h3 id="创建和使用字典"><a href="#创建和使用字典" class="headerlink" title="创建和使用字典"></a>创建和使用字典</h3><p>在Python中创建字典可以使用<code>&#123;&#125;</code>字面量语法，这一点跟上一节课讲的集合是一样的。但是字典的<code>&#123;&#125;</code>中的元素是以键值对的形式存在的，每个元素由<code>:</code>分隔的两个值构成，<code>:</code>前面是键，<code>:</code>后面是值，代码如下所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">xinhua = &#123;</span><br><span class="line">    <span class="string">&#x27;麓&#x27;</span>: <span class="string">&#x27;山脚下&#x27;</span>, <span class="string">&#x27;路&#x27;</span>: <span class="string">&#x27;道，往来通行的地方；方面，地区：南～货，外～货；种类：他俩是一～人&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;蕗&#x27;</span>: <span class="string">&#x27;甘草的别名&#x27;</span>, <span class="string">&#x27;潞&#x27;</span>: <span class="string">&#x27;潞水，水名，即今山西省的浊漳河；潞江，水名，即云南省的怒江&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(xinhua)</span><br><span class="line">person = &#123;</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;王大锤&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">55</span>, <span class="string">&#x27;weight&#x27;</span>: <span class="number">60</span>, <span class="string">&#x27;office&#x27;</span>: <span class="string">&#x27;科华北路62号&#x27;</span>, </span><br><span class="line">    <span class="string">&#x27;home&#x27;</span>: <span class="string">&#x27;中同仁路8号&#x27;</span>, <span class="string">&#x27;tel&#x27;</span>: <span class="string">&#x27;13122334455&#x27;</span>, <span class="string">&#x27;econtact&#x27;</span>: <span class="string">&#x27;13800998877&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">print</span>(person)</span><br></pre></td></tr></table></figure>
+
+<p>通过上面的代码，相信大家已经看出来了，用字典来保存一个人的信息远远优于使用列表或元组，因为我们可以用<code>:</code>前面的键来表示条目的含义，而<code>:</code>后面就是这个条目所对应的值。</p>
+<p>当然，如果愿意，我们也可以使用内置函数<code>dict</code>或者是字典的生成式语法来创建字典，代码如下所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dict函数(构造器)中的每一组参数就是字典中的一组键值对</span></span><br><span class="line">person = <span class="built_in">dict</span>(name=<span class="string">&#x27;王大锤&#x27;</span>, age=<span class="number">55</span>, weight=<span class="number">60</span>, home=<span class="string">&#x27;中同仁路8号&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(person)    <span class="comment"># &#123;&#x27;name&#x27;: &#x27;王大锤&#x27;, &#x27;age&#x27;: 55, &#x27;weight&#x27;: 60, &#x27;home&#x27;: &#x27;中同仁路8号&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以通过Python内置函数zip压缩两个序列并创建字典</span></span><br><span class="line">items1 = <span class="built_in">dict</span>(<span class="built_in">zip</span>(<span class="string">&#x27;ABCDE&#x27;</span>, <span class="string">&#x27;12345&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(items1)    <span class="comment"># &#123;&#x27;A&#x27;: &#x27;1&#x27;, &#x27;B&#x27;: &#x27;2&#x27;, &#x27;C&#x27;: &#x27;3&#x27;, &#x27;D&#x27;: &#x27;4&#x27;, &#x27;E&#x27;: &#x27;5&#x27;&#125;</span></span><br><span class="line">items2 = <span class="built_in">dict</span>(<span class="built_in">zip</span>(<span class="string">&#x27;ABCDE&#x27;</span>, <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">10</span>)))</span><br><span class="line"><span class="built_in">print</span>(items2)    <span class="comment"># &#123;&#x27;A&#x27;: 1, &#x27;B&#x27;: 2, &#x27;C&#x27;: 3, &#x27;D&#x27;: 4, &#x27;E&#x27;: 5&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用字典生成式语法创建字典</span></span><br><span class="line">items3 = &#123;x: x ** <span class="number">3</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>)&#125;</span><br><span class="line"><span class="built_in">print</span>(items3)     <span class="comment"># &#123;1: 1, 2: 8, 3: 27, 4: 64, 5: 125&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>想知道字典中一共有多少组键值对，仍然是使用<code>len</code>函数；如果想对字典进行遍历，可以用<code>for</code>循环，但是需要注意，<code>for</code>循环只是对字典的键进行了遍历，不过没关系，在讲完字典的运算后，我们可以通过字典的键获取到和这个键对应的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">person = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;王大锤&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">55</span>, <span class="string">&#x27;weight&#x27;</span>: <span class="number">60</span>, <span class="string">&#x27;office&#x27;</span>: <span class="string">&#x27;科华北路62号&#x27;</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(person))    <span class="comment"># 4</span></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> person:</span><br><span class="line">    <span class="built_in">print</span>(key)</span><br></pre></td></tr></table></figure>
+
+<h3 id="字典的运算"><a href="#字典的运算" class="headerlink" title="字典的运算"></a>字典的运算</h3><p>对于字典类型来说，成员运算和索引运算肯定是最为重要的，前者可以判定指定的键在不在字典中，后者可以通过键获取对应的值或者向字典中加入新的键值对。值得注意的是，字典的索引不同于列表的索引，列表中的元素因为有属于自己有序号，所以列表的索引是一个整数；字典中因为保存的是键值对，所以字典的索引是键值对中的键，通过索引操作可以修改原来的值或者向字典中存入新的键值对。需要<strong>特别提醒</strong>大家注意的是，<strong>字典中的键必须是不可变类型</strong>，例如整数（<code>int</code>）、浮点数（<code>float</code>）、字符串（<code>str</code>）、元组（<code>tuple</code>）等类型的值；显然，列表（<code>list</code>）和集合（<code>set</code>）是不能作为字典中的键的，当然字典类型本身也不能再作为字典中的键，因为字典也是可变类型，但是字典可以作为字典中的值。关于可变类型不能作为字典中的键的原因，我们在后面的课程中再为大家详细说明。这里，我们先看看下面的代码，了解一下字典的成员运算和索引运算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">person = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;王大锤&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">55</span>, <span class="string">&#x27;weight&#x27;</span>: <span class="number">60</span>, <span class="string">&#x27;office&#x27;</span>: <span class="string">&#x27;科华北路62号&#x27;</span>&#125;</span><br><span class="line"><span class="comment"># 检查name和tel两个键在不在person字典中</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;name&#x27;</span> <span class="keyword">in</span> person, <span class="string">&#x27;tel&#x27;</span> <span class="keyword">in</span> person)    <span class="comment"># True False</span></span><br><span class="line"><span class="comment"># 通过age修将person字典中对应的值修改为25</span></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;age&#x27;</span> <span class="keyword">in</span> person:</span><br><span class="line">    person[<span class="string">&#x27;age&#x27;</span>] = <span class="number">25</span></span><br><span class="line"><span class="comment"># 通过索引操作向person字典中存入新的键值对</span></span><br><span class="line">person[<span class="string">&#x27;tel&#x27;</span>] = <span class="string">&#x27;13122334455&#x27;</span></span><br><span class="line">person[<span class="string">&#x27;signature&#x27;</span>] = <span class="string">&#x27;你的男朋友是一个盖世垃圾，他会踏着五彩祥云去赢取你的闺蜜&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;name&#x27;</span> <span class="keyword">in</span> person, <span class="string">&#x27;tel&#x27;</span> <span class="keyword">in</span> person)    <span class="comment"># True True</span></span><br><span class="line"><span class="comment"># 检查person字典中键值对的数量</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(person))    <span class="comment"># 6</span></span><br><span class="line"><span class="comment"># 对字典的键进行循环并通索引运算获取键对应的值</span></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> person:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;key&#125;</span>: <span class="subst">&#123;person[key]&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p> 需要注意，在通过索引运算获取字典中的值时，如指定的键没有在字典中，将会引发<code>KeyError</code>异常。</p>
+<h3 id="字典的方法"><a href="#字典的方法" class="headerlink" title="字典的方法"></a>字典的方法</h3><p>字典类型的方法基本上都跟字典的键值对操作相关，可以通过下面的例子来了解这些方法的使用。例如，我们要用一个字典来保存学生的信息，我们可以使用学生的学号作为字典中的键，通过学号做索引运算就可以得到对应的学生；我们可以把字典中键对应的值也做成一个字典，这样就可以用多组键值对分别存储学生的姓名、性别、年龄、籍贯等信息，代码如下所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 字典中的值又是一个字典(嵌套的字典)</span></span><br><span class="line">students = &#123;</span><br><span class="line">    <span class="number">1001</span>: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;狄仁杰&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">22</span>, <span class="string">&#x27;place&#x27;</span>: <span class="string">&#x27;山西大同&#x27;</span>&#125;,</span><br><span class="line">    <span class="number">1002</span>: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;白元芳&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">23</span>, <span class="string">&#x27;place&#x27;</span>: <span class="string">&#x27;河北保定&#x27;</span>&#125;,</span><br><span class="line">    <span class="number">1003</span>: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;武则天&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="literal">False</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">20</span>, <span class="string">&#x27;place&#x27;</span>: <span class="string">&#x27;四川广元&#x27;</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用get方法通过键获取对应的值，如果取不到不会引发KeyError异常而是返回None或设定的默认值</span></span><br><span class="line"><span class="built_in">print</span>(students.get(<span class="number">1002</span>))    <span class="comment"># &#123;&#x27;name&#x27;: &#x27;白元芳&#x27;, &#x27;sex&#x27;: True, &#x27;age&#x27;: 23, &#x27;place&#x27;: &#x27;河北保定&#x27;&#125;</span></span><br><span class="line"><span class="built_in">print</span>(students.get(<span class="number">1005</span>))    <span class="comment"># None</span></span><br><span class="line"><span class="built_in">print</span>(students.get(<span class="number">1005</span>, &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;无名氏&#x27;</span>&#125;))    <span class="comment"># &#123;&#x27;name&#x27;: &#x27;无名氏&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取字典中所有的键</span></span><br><span class="line"><span class="built_in">print</span>(students.keys())      <span class="comment"># dict_keys([1001, 1002, 1003])</span></span><br><span class="line"><span class="comment"># 获取字典中所有的值</span></span><br><span class="line"><span class="built_in">print</span>(students.values())    <span class="comment"># dict_values([&#123;...&#125;, &#123;...&#125;, &#123;...&#125;])</span></span><br><span class="line"><span class="comment"># 获取字典中所有的键值对</span></span><br><span class="line"><span class="built_in">print</span>(students.items())     <span class="comment"># dict_items([(1001, &#123;...&#125;), (1002, &#123;....&#125;), (1003, &#123;...&#125;)])</span></span><br><span class="line"><span class="comment"># 对字典中所有的键值对进行循环遍历</span></span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> students.items():</span><br><span class="line">    <span class="built_in">print</span>(key, <span class="string">&#x27;---&gt;&#x27;</span>, value)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用pop方法通过键删除对应的键值对并返回该值</span></span><br><span class="line">stu1 = students.pop(<span class="number">1002</span>)</span><br><span class="line"><span class="built_in">print</span>(stu1)             <span class="comment"># &#123;&#x27;name&#x27;: &#x27;白元芳&#x27;, &#x27;sex&#x27;: True, &#x27;age&#x27;: 23, &#x27;place&#x27;: &#x27;河北保定&#x27;&#125;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(students))    <span class="comment"># 2</span></span><br><span class="line"><span class="comment"># stu2 = students.pop(1005)    # KeyError: 1005</span></span><br><span class="line">stu2 = students.pop(<span class="number">1005</span>, &#123;&#125;)</span><br><span class="line"><span class="built_in">print</span>(stu2)             <span class="comment"># &#123;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用popitem方法删除字典中最后一组键值对并返回对应的二元组</span></span><br><span class="line"><span class="comment"># 如果字典中没有元素，调用该方法将引发KeyError异常</span></span><br><span class="line">key, value = students.popitem()</span><br><span class="line"><span class="built_in">print</span>(key, value)    <span class="comment"># 1003 &#123;&#x27;name&#x27;: &#x27;武则天&#x27;, &#x27;sex&#x27;: False, &#x27;age&#x27;: 20, &#x27;place&#x27;: &#x27;四川广元&#x27;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># setdefault可以更新字典中的键对应的值或向字典中存入新的键值对</span></span><br><span class="line"><span class="comment"># setdefault方法的第一个参数是键，第二个参数是键对应的值</span></span><br><span class="line"><span class="comment"># 如果这个键在字典中存在，更新这个键之后会返回原来与这个键对应的值</span></span><br><span class="line"><span class="comment"># 如果这个键在字典中不存在，方法将返回第二个参数的值，默认为None</span></span><br><span class="line">result = students.setdefault(<span class="number">1005</span>, &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;方启鹤&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="literal">True</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(result)        <span class="comment"># &#123;&#x27;name&#x27;: &#x27;方启鹤&#x27;, &#x27;sex&#x27;: True&#125;</span></span><br><span class="line"><span class="built_in">print</span>(students)      <span class="comment"># &#123;1001: &#123;...&#125;, 1005: &#123;...&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用update更新字典元素，相同的键会用新值覆盖掉旧值，不同的键会添加到字典中</span></span><br><span class="line">others = &#123;</span><br><span class="line">    <span class="number">1005</span>: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;乔峰&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">32</span>, <span class="string">&#x27;place&#x27;</span>: <span class="string">&#x27;北京大兴&#x27;</span>&#125;,</span><br><span class="line">    <span class="number">1010</span>: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;王语嫣&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="literal">False</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">19</span>&#125;,</span><br><span class="line">    <span class="number">1008</span>: &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;钟灵&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="literal">False</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line">students.update(others)</span><br><span class="line"><span class="built_in">print</span>(students)      <span class="comment"># &#123;1001: &#123;...&#125;, 1005: &#123;...&#125;, 1010: &#123;...&#125;, 1008: &#123;...&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>跟列表一样，从字典中删除元素也可以使用<code>del</code>关键字，在删除元素的时候如果指定的键索引不到对应的值，一样会引发<code>KeyError</code>异常，具体的做法如下所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">person = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;王大锤&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">25</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="literal">True</span>&#125;</span><br><span class="line"><span class="keyword">del</span> person[<span class="string">&#x27;age&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(person)    <span class="comment"># &#123;&#x27;name&#x27;: &#x27;王大锤&#x27;, &#x27;sex&#x27;: True&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字典的应用"><a href="#字典的应用" class="headerlink" title="字典的应用"></a>字典的应用</h3><p>我们通过几个简单的例子来讲解字典的应用。</p>
+<p><strong>例子1</strong>：输入一段话，统计每个英文字母出现的次数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sentence = <span class="built_in">input</span>(<span class="string">&#x27;请输入一段话: &#x27;</span>)</span><br><span class="line">counter = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> ch <span class="keyword">in</span> sentence:</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;A&#x27;</span> &lt;= ch &lt;= <span class="string">&#x27;Z&#x27;</span> <span class="keyword">or</span> <span class="string">&#x27;a&#x27;</span> &lt;= ch &lt;= <span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">        counter[ch] = counter.get(ch, <span class="number">0</span>) + <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> counter.items():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;字母<span class="subst">&#123;key&#125;</span>出现了<span class="subst">&#123;value&#125;</span>次.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>例子2</strong>：在一个字典中保存了股票的代码和价格，找出股价大于100元的股票并创建一个新的字典。</p>
+<blockquote>
+<p><strong>说明</strong>：可以用字典的生成式语法来创建这个新字典。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">stocks = &#123;</span><br><span class="line">    <span class="string">&#x27;AAPL&#x27;</span>: <span class="number">191.88</span>,</span><br><span class="line">    <span class="string">&#x27;GOOG&#x27;</span>: <span class="number">1186.96</span>,</span><br><span class="line">    <span class="string">&#x27;IBM&#x27;</span>: <span class="number">149.24</span>,</span><br><span class="line">    <span class="string">&#x27;ORCL&#x27;</span>: <span class="number">48.44</span>,</span><br><span class="line">    <span class="string">&#x27;ACN&#x27;</span>: <span class="number">166.89</span>,</span><br><span class="line">    <span class="string">&#x27;FB&#x27;</span>: <span class="number">208.09</span>,</span><br><span class="line">    <span class="string">&#x27;SYMC&#x27;</span>: <span class="number">21.29</span></span><br><span class="line">&#125;</span><br><span class="line">stocks2 = &#123;key: value <span class="keyword">for</span> key, value <span class="keyword">in</span> stocks.items() <span class="keyword">if</span> value &gt; <span class="number">100</span>&#125;</span><br><span class="line"><span class="built_in">print</span>(stocks2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单的总结"><a href="#简单的总结" class="headerlink" title="简单的总结"></a>简单的总结</h3><p>Python程序中的字典跟现实生活中字典非常像，允许我们<strong>以键值对的形式保存数据</strong>，再<strong>通过键索引对应的值</strong>。这是一种非常<strong>有利于数据检索</strong>的数据类型，底层原理我们在后续的课程中再研究。再次提醒大家注意，<strong>字典中的键必须是不可变类型</strong>，字典中的值可以是任意类型。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python-%E5%AD%97%E5%85%B8/">python,字典</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/12/%E7%AC%AC13%E8%AF%BE%EF%BC%9A%E5%87%BD%E6%95%B0%E5%92%8C%E6%A8%A1%E5%9D%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">函数和模块</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/12/%E7%AC%AC11%E8%AF%BE%EF%BC%9A%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88/">
+                        <span class="hidden-mobile">常用数据结构之集合</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
