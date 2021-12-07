@@ -15,12 +15,28 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
-  <meta name="author" content="田茂海">
+  <meta name="author" content="TMH">
   <meta name="keywords" content="">
   
-  <title>标签 - python,集合 - TMH个人博客</title>
+  <title>模型评估 - TMH个人博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,17 +163,50 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="标签 - python,集合">
+            <span class="h2" id="subtitle" title="模型评估">
               
             </span>
 
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-07 11:01" pubdate>
+        2021年12月7日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      87 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      1
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -166,40 +215,84 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 1 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/11/12/%E7%AC%AC11%E8%AF%BE%EF%BC%9A%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E9%9B%86%E5%90%88/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">常用数据结构之集合</span>
-      <time style="float: right;">11-12</time>
-    </a>
-  
-</div>
 
-
-
-
-
-              </div>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">模型评估</h1>
+            
+            <div class="markdown-body">
+              <h2 id="模型评估-分类模型-回归就是R方"><a href="#模型评估-分类模型-回归就是R方" class="headerlink" title="模型评估    分类模型           回归就是R方"></a>模型评估    分类模型           回归就是R方</h2><h3 id="1-混淆矩阵-confusion-matrix"><a href="#1-混淆矩阵-confusion-matrix" class="headerlink" title="1.混淆矩阵  confusion-matrix"></a>1.混淆矩阵  confusion-matrix</h3><h4 id="准确率-预测正确的-总的"><a href="#准确率-预测正确的-总的" class="headerlink" title="准确率=预测正确的/总的"></a>准确率=预测正确的/总的</h4><p><img src="C:\Users\tian\AppData\Roaming\Typora\typora-user-images\image-20211029103624993.png" srcset="/img/loading.gif" lazyload alt="image-20211029103624993"></p>
+<p><img src="C:\Users\tian\AppData\Roaming\Typora\typora-user-images\image-20211029105830147.png" srcset="/img/loading.gif" lazyload alt="image-20211029105830147"></p>
+<h4 id="查准率-1的产准率-55-62"><a href="#查准率-1的产准率-55-62" class="headerlink" title="查准率 :1的产准率 55/62"></a>查准率 :1的产准率 55/62</h4><h4 id="查全率（召回率）-1的查全率-55-60"><a href="#查全率（召回率）-1的查全率-55-60" class="headerlink" title="查全率（召回率）:1的查全率 55/60"></a>查全率（召回率）:1的查全率 55/60</h4><h4 id="F1-Score-1-查准率-1-查全率"><a href="#F1-Score-1-查准率-1-查全率" class="headerlink" title="F1 Score=1/查准率+1/查全率"></a>F1 Score=1/查准率+1/查全率</h4><h4 id="ROC曲线-与AUC-曲线ROC下的面积-数值-越大越好-代表同一种东西"><a href="#ROC曲线-与AUC-曲线ROC下的面积-数值-越大越好-代表同一种东西" class="headerlink" title="ROC曲线 与AUC(曲线ROC下的面积) 数值 越大越好  代表同一种东西"></a>ROC曲线 与AUC(曲线ROC下的面积) 数值 越大越好  代表同一种东西</h4>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/sklearn/">sklearn</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/sklearn%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/">sklearn模型评估</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -280,9 +373,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
