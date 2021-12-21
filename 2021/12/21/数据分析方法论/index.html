@@ -1,0 +1,843 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="TMH">
+  <meta name="keywords" content="">
+  
+  <title>数据分析常用方法 - TMH个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tmhgit.github.io","root":"/","version":"1.8.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据分析常用方法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-21 15:10" pubdate>
+        2021年12月21日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      9.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      96
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据分析常用方法</h1>
+            
+            <div class="markdown-body">
+              <h1 id="数据分析方法论"><a href="#数据分析方法论" class="headerlink" title="数据分析方法论"></a>数据分析方法论</h1><h2 id="一、公式法"><a href="#一、公式法" class="headerlink" title="一、公式法"></a>一、公式法</h2><p>所谓公式法就是针对某个指标，用公式层层分解该指标的影响因素。</p>
+<p>举例:分析某产品的销售额较低的原因，用公式法分解： </p>
+<ul>
+<li>某产品销售额=销售量 X 产品单价</li>
+<li>销售量=渠道A销售量 + 渠道B销售量 + 渠道C销售量 + …</li>
+<li>渠道销售量=点击用户数UV X 下单率 购买转化</li>
+<li>点击用户数=曝光量 X 点击率</li>
+</ul>
+<p><strong>第一层:找到产品销售额的影响因素。</strong>某产品销售额=销售量 X 产品单价。是销量过低还是价格设置不合理?</p>
+<p><strong>第二层:找到销售量的影响因素。</strong>分析各渠道销售量，对比以往，是哪些过低了。</p>
+<p><strong>第三层:分析影响渠道销售量的因素。</strong>渠道销售量=点击用户数 X 下单率。是点击用户数低了， 还是下单量过低。如果是下单量过低，需要看一下该渠道的广告内容针对的人群和产品实际受 众符合度高不高。</p>
+<p><strong>第四层:分析影响点击的因素。</strong>点击用户数=曝光量 X 点击率。是曝光量不够还是点击率太低， 点击率低需要优化广告创意，曝光量则和投放的渠道有关。通过对销售额的逐层拆解，细化评估以及分析的粒度。 公式拆解法是针对问题的层级式解析，在拆解时，对因素层层分解，层层剥尽。</p>
+<h2 id="二、象限法"><a href="#二、象限法" class="headerlink" title="二、象限法"></a>二、象限法</h2><p>网易云、QQ、酷狗、虾米</p>
+<p>用户日活 、年龄层、购买会员数、</p>
+<p>通过对两种及以上维度的划分，运用坐标的方式表达出想要的价值。由价值直接转变为策略， 从而进行一些落地的推动。象限法是一种策略驱动的思维，常于产品分析、市场分析、客户管 理、商品管理等。</p>
+<img src="http://image.woshipm.com/wp-files/2020/05/f13WuZ3bnfjELhDLBra2.jpeg" srcset="/img/loading.gif" lazyload alt="img" style="zoom:60%;" />
+
+
+
+<img src="http://image.woshipm.com/wp-files/2020/05/WQSgegXa4UXdyYTGrrkm.jpeg" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" />
+
+<p>还有经典的 RFM 模型，把客户按最近一次消费(Recency)、消费频率(Frequency)、消费金额 (Monetary)三个维度分成八个象限。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-04470b0165b7dfa8b994c33d6e8f7353_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>象限法的优势:<br><strong>1. 找到问题的共性原因</strong><br>通过象限分析法，将有相同特征的事件进行归因分析，总结其中的共性原因。例如上面广告的 案例中，第一象限的事件可以提炼出有效的推广渠道与推广策略，第三和第四象限可以排除一 些无效的推广渠道;<br><strong>2. 建立分组优化策略</strong><br>针对投放的象限分析法可以针对不同象限建立优化策略，例如 RFM 客户管理模型中按照象限 将客户分为重点发展客户、重点保持客户、一般发展客户、一般保持客户等不同类型。给重点 发展客户倾斜更多的资源，比如 VIP 服务、个性化服务、附加销售等。给潜力客户销售价值更 高的产品，或一些优惠措施来吸引他们回归。</p>
+<h2 id="三、二八法-帕累托分析"><a href="#三、二八法-帕累托分析" class="headerlink" title="三、二八法/帕累托分析"></a>三、二八法/帕累托分析</h2><p>二八法也可以叫帕累托法则，源于经典的二八法则。比如在个人财富上可以说世界上 20%的 人掌握着 80%的财富。而在数据分析中，则可以理解为 20%的数据产生了 80%的效果需要围 绕这 20%的数据进行挖掘。往往在使用二八法则的时候和排名有关系，排在前 20%的才算是 有效数据。二八法是抓重点分析，适用于任何行业。找到重点，发现其特征，然后可以思考如 何让其余的 80%向这 20%转化，提高效果。一般地，会用在产品分类上，去测量并构建 ABC 模型。比如某零售企业有 500 个 SKU 以及这 些 SKU 对应的销售额，那么哪些 SKU 是重要的呢，这就是在业务运营中分清主次的问题。常见的做法是将产品 SKU 作为维度，并将对应的销售额作为基础度量指标，将这些销售额指 标从大到小排列，并计算截止当前产品 SKU 的销售额累计合计占总销售额的百分比。百分比在 70%(含)以内，划分为 A 类。 百分比在 70<del>90%(含)以内，划分为 B 类。 百分比在 90</del>100%(含)以内，划分为 C 类。 以上百分比也可以根据自己的实际情况调整。ABC分析模型，不光可以用来划分产品和销售额，还可以划分客户及客户交易额等。比如给企 业贡献 80%利润的客户是哪些，占比多少。假设有 20%，那么在资源有限的情况下，就知道 要重点维护这 20%类客户。</p>
+<h2 id="四、漏斗法"><a href="#四、漏斗法" class="headerlink" title="四、漏斗法"></a>四、漏斗法</h2><p>漏斗法即是漏斗图，有点像倒金字塔，是一个流程化的思考方式，常用于像新用户的开发、购物转化率这些有变化和一定流程的分析中。上图是经典的营销漏斗，形象展示了从获取用户到最终转化成购买这整个流程中的一个个子环 节。相邻环节的转化率则就是指用数据指标来量化每一个步骤的表现。所以整个漏斗模型就是 先将整个购买流程拆分成一个个步骤，然后用转化率来衡量每一个步骤的表现，最后通过异常 的数据指标找出有问题的环节，从而解决问题，优化该步骤，最终达到提升整体购买转化率的目的。整体漏斗模型的核心思想其实可以归为分解和量化。比如分析电商的转化，我们要做的就是监 控每个层级上的用户转化，寻找每个层级的可优化点。对于没有按照流程操作的用户，专门绘 制他们的转化模型，缩短路径提升用户体验。还有经典的黑客增长模型，AARRR 模型，指 Acquisition、Activation、Retention、Revenue、 Referral，即用户获取、用户激活、用户留存、用户收益以及用户传播。这是产品运营中比较 常见的一个模型，结合产品本身的特点以及产品的生命周期位置，来关注不同的数据指标，最 终制定不同的运营策略。从下面这幅 AARRR 模型图中，能够比较明显的看出来整个用户的生命周期是呈现逐渐递减趋 势的。通过拆解和量化整个用户生命周期各环节，可以进行数据的横向和纵向对比，从而发现 对应的问题，最终进行不断的优化迭代。</p>
+<h2 id="五、逻辑树分析方法"><a href="#五、逻辑树分析方法" class="headerlink" title="五、逻辑树分析方法"></a>五、逻辑树分析方法</h2><h3 id="1-1、逻辑拆解"><a href="#1-1、逻辑拆解" class="headerlink" title="1.1、逻辑拆解"></a>1.1、逻辑拆解</h3><p>将复杂问题拆解成多子个问题进行分析(费米问题)不断地分解问题。逻辑树又称问题树、分解树等。逻辑树是将问题的所有子问题分层罗列，从最高层开始并逐步向下扩展。将复杂问题经过合理的假设拆解成一个一个子问题。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-a3a149bf3bb059d21856888d865dc97b_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>例如一个经典的费米问题分析方法：请问一座城市有多少调音师？ 拆解为两个子问题： 总共多少个调音师=所有调音师1年总共工作多长时间➗一个调音师一年工作多长时间</p>
+<p><strong>所有调音师1年总共工作多长时间：10万小时</strong></p>
+<ul>
+<li>(第三层拆解)-如果一座城市居民500万，按拥有钢琴的人最小比例值1%的计算，则全市有5万架钢琴</li>
+<li>(第二层拆解)-假设一架钢琴每年需要调音1次，每次调音要2个小时，一年工作365天，</li>
+<li>(第一层拆解)-得出所有调音师1年总共工作10万小时=(5万架)X(1年1次)X(2小时)</li>
+</ul>
+<p><strong>一个调音师1年工作多长时间：2000小时</strong></p>
+<ul>
+<li>(第二层拆解)-假设1个调音师一周工作5天，每天工作8小时，一年工作50个星期</li>
+<li>(第一层拆解)-得出一个调音师一年工作时长2000小时=(8小时)X(5天)X(5星期)</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/80/v2-eaeb1a5c1b7092ced2d1d8548d1fb30f_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="1-2、有什么用？"><a href="#1-2、有什么用？" class="headerlink" title="1.2、有什么用？"></a>1.2、有什么用？</h3><p>最大的用处就是去解决“费米问题”</p>
+<p>什么是费米问题呢？</p>
+<p>在<strong>产品经理或者数据分析师</strong>的面试过程中，面试官经常会遇到如下的问题，比如</p>
+<ul>
+<li><p>上海有多少个红绿灯？</p>
+</li>
+<li><p>北京有多少特斯拉？</p>
+</li>
+<li><p>芝加哥有多少钢琴？</p>
+</li>
+<li><p>北京有多少出租车？</p>
+</li>
+<li><p>某煎饼摊，一天卖出的煎饼数量是多少？</p>
+</li>
+<li><p>多少兵乓球可以装满这个屋子？</p>
+</li>
+<li><p>深圳有多少产品经理？</p>
+</li>
+<li><p>北京有多少个加油站？</p>
+</li>
+</ul>
+<p>费米问题常用来被考察面试者以下三方面的能力</p>
+<ul>
+<li><strong>逻辑分析能力：</strong>遇到问题是否有清晰有条理，考察产品感和基础逻辑能力</li>
+<li><strong>数据能力：</strong>对数据的关注度，是否重视日常的数据</li>
+<li><strong>细节把握的能力：</strong>是否注意分析分析中的细节，结合实际情况去细化</li>
+</ul>
+<h3 id="1-3、如何去用？"><a href="#1-3、如何去用？" class="headerlink" title="1.3、如何去用？"></a>1.3、如何去用？</h3><p>经典分析问题举例说明：</p>
+<p><strong>芝加哥有多少钢琴调音师？</strong></p>
+<p>用逻辑数分析方法后可以得出</p>
+<p><strong>钢琴调音师的数量=【芝加哥所有的钢琴师1年的总工作时间】÷【钢琴师每年的工作时间】</strong></p>
+<p><strong>【前者】:<strong>芝加哥所有的钢琴师1年的总工作时间由下面几个因素决定</strong>——需求侧</strong></p>
+<ul>
+<li>芝加哥有多少架钢琴：250万人口乘以2%=5万</li>
+<li>钢琴每年要调几次音：1年1次</li>
+<li>调一次音要多久：2小时</li>
+<li>所以一年的总工作时间是 5万×1×2=10万小时</li>
+</ul>
+<p><strong>【后者】：</strong>钢琴师每年的工作时间由下面几个因素决定<strong>——供给侧</strong></p>
+<ul>
+<li>5天8小时，50个星期=2000个小时</li>
+<li>耗费在奔波的路上要减去-20%=1600小时</li>
+</ul>
+<p>结果就出来了</p>
+<p>芝加哥大概有10万 ÷ 1600=60个</p>
+<p>典型的供需关系问题</p>
+<h3 id="1-4、费米问题：解题思路与技巧"><a href="#1-4、费米问题：解题思路与技巧" class="headerlink" title="1.4、费米问题：解题思路与技巧"></a>1.4、费米问题：解题思路与技巧</h3><p>如何面对产品经理或者数据分析师面试中开放的问题</p>
+<p><strong>常用的思路：</strong></p>
+<ul>
+<li>已知数据进行切入</li>
+<li>通用的三种解答方法进行切入：<strong>供需关系，空间分析、收入分析</strong></li>
+</ul>
+<p><strong>常用的数据（需要对数据有个基本的了解）：</strong></p>
+<ul>
+<li>北京1600平方千米，2100万人口</li>
+<li>上海6300平方千米，2400万人口</li>
+<li>广州7400平方千米，1400万人口</li>
+<li>深圳2000平方千米，1200万人口</li>
+</ul>
+<p><strong>基于以上思路再次举个例子：</strong>请你估算北京有多少个加油站？</p>
+<h4 id="解题方法1：从供需关系出发【解决80-的费米问题】"><a href="#解题方法1：从供需关系出发【解决80-的费米问题】" class="headerlink" title="解题方法1：从供需关系出发【解决80%的费米问题】"></a>解题方法1：从供需关系出发【解决80%的费米问题】</h4><ul>
+<li><strong>假设：</strong>加油站的供求关系是平衡的，市场供应量与需求侧匹配</li>
+<li><strong>参数：</strong>北京有500万机动车、一辆车10天＋一次油，一辆车加油5分钟，大部分车主实际加油时间为早上8点到晚上10点，14个小时，一个加油站默认2个加油桩，加油桩利用率50%</li>
+<li><strong>模型分析</strong>：<ul>
+<li>北京一天加油能力=北京的车辆一天加油需求次数</li>
+<li>供给侧：北京城市一天加油能力=14个小时×50%利用率×2个桩÷5分钟，也就是一个加油桩一天能加168辆车</li>
+<li>需求侧：500万车除以10，每天平均有50万辆车，要加油</li>
+<li>50万除以168 ，也就是3000个加油站</li>
+</ul>
+</li>
+<li><strong>点评：模型客观，参数值较为确定，参数个数较多</strong></li>
+</ul>
+<h4 id="解题方法2：从空间关系出发"><a href="#解题方法2：从空间关系出发" class="headerlink" title="解题方法2：从空间关系出发"></a><strong>解题方法2：从空间关系出发</strong></h4><ul>
+<li><strong>假设：</strong>一个司机开到北京任何一个地方，快没油了，这个司机都能在很短的地方加到油</li>
+<li><strong>参数：</strong>5分钟能加到油，车速50km/h, 北京的面积1600平方千米</li>
+<li><strong>模型分析：</strong><ul>
+<li>司机加到油的活动范围为：（50km/h乘以5分钟)^2</li>
+<li>北京的面积1600平方千米÷司机加油的活动范围=922个</li>
+</ul>
+</li>
+<li><strong>点评：</strong>模型比较好理解；但是参数值非常不确定，参数个数较少</li>
+</ul>
+<h4 id="解题方法3：从收入分析出发"><a href="#解题方法3：从收入分析出发" class="headerlink" title="解题方法3：从收入分析出发"></a>解题方法3：从收入分析出发</h4><ul>
+<li><strong>假设</strong>：加油站的收入能够撑得起他的运营成本</li>
+<li><strong>参数：</strong>北京500辆车、一辆车10天加一次油、加一次油200元，毛利润占收入的10%，工资支出占利润的50%，需要5个人支撑起一个加油站的营运，人均工资5000元</li>
+<li><strong>模型分析：</strong><ul>
+<li>北京某个加油站总支出：工资支出5000×5；</li>
+<li>北京的加油站总收入：500万辆车、10一天加一次油。一次油200,，再乘以10%的毛利润，再乘以50%</li>
+<li><strong>最终：</strong>北京的加油站总收入(支出)÷北京某个加油站总支出=6000个</li>
+</ul>
+</li>
+</ul>
+<p>三种方法估计出来的值大约为1000到6000，可以得出北京市加油站的数量级应该为“千”，取个平均值，大概为3000。</p>
+<h3 id="1-5、费米问题案例集"><a href="#1-5、费米问题案例集" class="headerlink" title="1.5、费米问题案例集"></a>1.5、费米问题案例集</h3><p>【1】上海有多少个红绿灯？</p>
+<ul>
+<li><strong>解题方法：</strong>空间关系，</li>
+<li><strong>假设：</strong>为了保证路口的安全，需要控制城市内的车保持中等速度行驶，</li>
+<li><strong>参数：</strong>一个路口有4个红绿灯，10分钟以60km/h的速度前进的汽车一定会遇到红绿灯，上海市面积6300平方千米</li>
+</ul>
+<p>【2】北京有多少特斯拉？</p>
+<ul>
+<li><strong>模型分析：</strong>北京汽车保有量500万×特斯拉占据市场的份额，另外汽车的占据市场份额可以在路口蹲守，一个小时内经过了100辆车，有5辆是特斯拉，那就默认市场份额5%</li>
+</ul>
+<p>【3】北京有多少出租车？</p>
+<ul>
+<li>解题方法：供需角度</li>
+<li>假设：假设北京市做出租车的需求量和出租车的数量是相匹配的</li>
+<li>参数：<ul>
+<li>一天中市场的打车时间需求：北京市人口2100万人口，一天中的打车比例为2%，每次打车的时间在30分钟；</li>
+<li>一辆出租车可以提供的时间：24小时中，在途8小时，14小时休息，2小时空载；另外市面上，也就是每天8小时，一个司机可以解决6除以30分钟，也就是12个人的打车需求</li>
+</ul>
+</li>
+<li>2100×2%÷12，就是北京出租车得数量</li>
+</ul>
+<p>【4】某煎饼摊，一年卖出的煎饼数量是多少？</p>
+<ul>
+<li>解题方法：从供需角度来解决</li>
+<li>假设：能卖出的煎饼与能做出的煎饼供需关系一致</li>
+<li>参数：<ul>
+<li>煎饼大妈一天的工作时间：早上2小时、中午1小时、晚上2小时，总共5小时。</li>
+<li>煎饼大妈做一个煎饼的时间：5分钟</li>
+</ul>
+</li>
+<li>360天×（5小时÷5分钟）=？</li>
+</ul>
+<p>【5】多少兵乓球可以装满这个屋子？</p>
+<ul>
+<li>解题方法：从空间关系出发</li>
+<li>假设：乒乓球立体的、塞满整个屋子</li>
+<li>参数：利用乒乓球的直径计算他的正方体面积0.025平方米，整个屋子的面积100平方米</li>
+<li>模型分析：相除即可</li>
+</ul>
+<p>【6】深圳有多少产品经理</p>
+<ul>
+<li>解题方法：从供需关系</li>
+<li>假设：深圳市所有互联网公司都有产品经理</li>
+<li>参数：深圳市互联网公司总数5000家，每一家公司的人员数量各不相同，但是加起来从业人数50万人，每一家公司的人员配比为（1：1：1：1：4：1）—销售：产品：交互：视觉：研发：人力等；</li>
+<li>模型分析：50万*（1/9）=11万</li>
+</ul>
+<h2 id="六、多维度拆解分析方法"><a href="#六、多维度拆解分析方法" class="headerlink" title="六、多维度拆解分析方法"></a>六、多维度拆解分析方法</h2><p>顾名思义从多个维度拆解分析数据(维度、拆解)。在数据分析中，通过不同的维度去观察同一组数据，从而观察数据变化后的原因。大部分数据变化可以从**”数据指标”<strong>和</strong>“业务流程”<strong>两个方向进行拆解分析。</strong>“数据指标”维度：<strong>指的是数据指标构成因素的分析，比如用户指标(包含新增用户，留存用户等)</strong>“业务流程”维度：**指的是在实际业务流程中的因素分析，比如渠道分析(不同渠道的推广效果，不同渠道的付费率等)。其他：”时间维度“，“地区维度”等。</p>
+<h2 id="七、5W2H-方法论"><a href="#七、5W2H-方法论" class="headerlink" title="七、5W2H 方法论"></a>七、5W2H 方法论</h2><p><strong>5W2H分析法。</strong>在碰到一个问题的时候，都可以从7个方面思考：why、what、who、when、where、how、how much。<strong>对于题主的问题来说顺序其实没有特别严格的规定哦~！</strong></p>
+<p><strong>具体的内容包括：</strong></p>
+<p>· WHY——为什么？为什么要这么做？理由何在？原因是什么？</p>
+<p>· WHAT——是什么？目的是什么？做什么工作？</p>
+<p>· WHO——谁？由谁来承担？谁来完成？谁负责？相关方是谁？</p>
+<p>· WHEN——何时？什么时间完成？什么时机最适宜？</p>
+<p>· WHERE——何处？在哪里做？从哪里入手？</p>
+<p>· HOW——怎么做？如何提高效率？如何实施？方法怎样？</p>
+<p>· HOW MUCH——多少？做到什么程度？数量如何？质量水平如何？费用产出如何？</p>
+<p>你在脑子空白，不知道如何回答的时候，可以套用5W2H框架，把问题进行细化，快速明确问题，让自己的思路条理化。</p>
+<p><strong>以面试的角度来谈论如何在实战中用好5W2H分析法</strong></p>
+<blockquote>
+<p>「你们现在准备一个电动汽车上市的推广策划，预算是20w，一个月的时间准备，你会怎样规划？（奔驰面试题）」</p>
+</blockquote>
+<p><strong>首先，我们发现题目给出的信息非常少，我们可以和面试官沟通。</strong>（如果是群面，就可以和同组的小伙伴们沟通）</p>
+<p>“这个电动汽车的定价是多少？”</p>
+<p>“电动汽车的产品定位是什么？有什么产品特色？技术上？外观上？”</p>
+<p>“电动汽车的目标用户画像是怎样的？”</p>
+<p>“有多少台电动汽车可以在推广期使用？”</p>
+<p>……</p>
+<p>通过和面试官的沟通，假定获取以下信息：</p>
+<p>这款电动汽车定价20w左右，在技术上突破了传统电动汽车续航里程短、充电慢的缺点，性能上对齐传统汽车，但是比传统汽车更节能经济。适合工作了3-5年的1、2线白领人群，男性居多，大概有3台车可以在推广时使用。</p>
+<p><strong>然后，我们先按照5W2H的框架来分析一遍。</strong>我们的回答可以是：</p>
+<ul>
+<li><strong>Why - 策划目的</strong> </li>
+</ul>
+<p>这个策划是要拓展年轻群体对电动汽车的认知，培养一批种子用户。预期传播覆盖人群200w+。</p>
+<ul>
+<li><strong>What - 主题内容</strong></li>
+</ul>
+<p>策划的主题是“电动，从此环保奔驰”，强化大家对电动、环保和性能的感知。</p>
+<ul>
+<li><strong>When - 活动时间</strong></li>
+</ul>
+<p>配合上市时间，推广时间在上市前2周，为上市做好预热。</p>
+<ul>
+<li><strong>Where - 渠道</strong></li>
+</ul>
+<p>预期目标分解，线上线下联动：</p>
+<ol>
+<li><p>提前制作宣传视频，选择汽车KOL的新媒体、虎扑等直男社区投放。（传播目标100w+）</p>
+</li>
+<li><p>与商场合作，开设试驾点。事先在网上开放报名，邀请网友在现场体验驾驶，记录并制作VLOG视频。（现场活动，参与人员有限）</p>
+</li>
+<li><p>后期Vlog传播，保持话题热度。（传播目标100w+）</p>
+</li>
+</ol>
+<ul>
+<li><strong>Who - 相关人员</strong></li>
+</ul>
+<p>内部：根据内部人员情况，做好工作分配安排</p>
+<p>合作方：提前联系并确认好供应商、合作媒体、宣传资源</p>
+<ul>
+<li><strong>How - 怎么做</strong></li>
+</ul>
+<p>前期准备一个月的时间，整个推广策划大概需要7天时间，宣传视频策划制作、前期活动准备同步进行，大致需要20天时间，留下3天做推广上线前的调整时间。</p>
+<p>全程实施检测效果，包括线上的播放量、转赞评等数据，线下的活动口碑等，活动结束后完成活动总结报告，对推广的效果做出总结。 </p>
+<p>可做好项目安排表，合理规划项目进度。</p>
+<ul>
+<li><strong>How much - 成本</strong></li>
+</ul>
+<p>总预算20w。</p>
+<p>宣传视频拍摄预算5w、kol新媒体投放预算7w、商场试驾预算7w，多出1w作为备用资金，应对一些突发情况。</p>
+<h2 id="八、PEST分析方法论：行业分析"><a href="#八、PEST分析方法论：行业分析" class="headerlink" title="八、PEST分析方法论：行业分析"></a>八、PEST分析方法论：行业分析</h2><p>政策（Policy）、经济（Economy）、社会（Society）、技术（Technology）</p>
+<p><img src="https://pic2.zhimg.com/80/v2-0cc0c02499b50f681d0be70e7ce03d1d_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="九、AARRR-用户行为分析方法论"><a href="#九、AARRR-用户行为分析方法论" class="headerlink" title="九、AARRR 用户行为分析方法论"></a>九、AARRR 用户行为分析方法论</h2><p>AARRR模型对应产品运营的 5 个重要环节，分别是：</p>
+<p><strong>第一环节是获取用户（Acquisition ）：用户如何找到我们？</strong></p>
+<p><strong>1.语言——市场匹配</strong>，怎么说才能打动用户的心</p>
+<p>实际上考验的是抓住用户注意力的能力。现在人们关注一条网络信息的时间通常是8秒，如果不能在8秒内告诉用户你的产品对他有什么用，你就失去了一次获客的机会。</p>
+<p><strong>2.渠道——产品匹配，</strong>产品投放在什么渠道才能直达用户的视线范围</p>
+<p>渠道可以分为三类，一种是口碑渠道，适合病毒营销；一种是有机渠道，适合搜索引擎优化（SEO）、内容营销，比如搜索引擎优化可以提高自己网站在搜索引擎搜索结果页面的排名；还有一种是付费渠道，有哪些付费渠道呢？</p>
+<p>1）展示位广告</p>
+<ul>
+<li>在网站或手机 App 的顶部、App 的开屏广告位等。</li>
+<li>按展示次数付费（CPM，Cost Per Mille），也就是有多少人看到了该广告。</li>
+</ul>
+<p>2）搜索广告</p>
+<ul>
+<li>广告主为某一个搜索关键词出价，用户看到的搜索结果是按广告主出价的高低来排名的。</li>
+<li>按点击次数付费（CPC，Cost Per Click），也就是有多少人点击了该广告。</li>
+</ul>
+<p>3）信息流广告</p>
+<ul>
+<li><p>根据用户的兴趣爱好来推荐广告。</p>
+</li>
+<li><p>按点击次数付费（CPC）或者按投放的实际效果付费（CPA，Cost Per Action）。</p>
+</li>
+<li><p>按投放的实际效果付费（CPA，Cost Per Action）包括：</p>
+</li>
+<li><ul>
+<li>CPD（Cost Per Download）：按 App 的下载数计费</li>
+<li>CPI（Cost Per Install）：按激活 App 的数量计费</li>
+<li>CPS（Cost Per Sales）：按完成购买的用户数或者销售额来计费</li>
+</ul>
+</li>
+</ul>
+<p>在将产品投放去哪个渠道的时候，要清楚你的目标用户是谁，目标用户在哪。目前主流广告平台都支持这三种方式的付费：按展示次数付费（CPM）、按点击次数付费（CPC）和按投放的实际效果付费（CPA）。广告主可以按自己的产品需求来灵活选择。</p>
+<p><strong>【需要关注的指标】</strong></p>
+<ul>
+<li>渠道曝光量：有多少人看到产品推广的线索</li>
+<li>渠道转换率：有多少用户因为曝光转换成用户</li>
+<li>日新增用户数：每天新增用户是多少</li>
+<li>日应用下载量：每天有多少用户下载了产品</li>
+<li>获客成本（CAC）：获取一个客户所花费的成本</li>
+</ul>
+<p><strong>第二环节是激活用户（Activation）：用户的首次体验如何？</strong></p>
+<p>想唤醒休眠用户，就得先摸清楚产品的“啊哈时刻”（Aha moment，让用户感受到产品亮点情不自禁地发出赞叹的时刻，它对应的就是打动用户的产品亮点）。</p>
+<p>要想激活用户，得绘制一幅通往“啊哈时刻”的路线图。比如你负责的产品是个购物软件，在新用户体验到啊哈时刻之前，必须要完成下面这些步骤：下载app，找到所需商品，放入购物车，创建账户，输入姓名，加入信用卡和配送信息，然后点击购买。</p>
+<p>在这一系列动作中，到底用户停留在了哪一步？是搜不到要的东西，还是创建账户太麻烦，或者是页面设置不合理？你要计算每个节点用户的流失率，来相应地提高产品性能，改善用户体验。</p>
+<p><strong>【需要关注的指标】</strong></p>
+<ul>
+<li><p>日活跃用户数（日活）：一天之内，登录或使用了某个产品的用户数。比如一天内打开我微信公众号的人数。类似的还有周活跃用户数，月活跃用户数。</p>
+</li>
+<li><p>活跃率（活跃用户占比）：某一时间段内活跃用户在总用户量的占比。根据时间可分为日活跃率（DAU）、周活跃率（WAU）、月活跃率（MAU）等。</p>
+</li>
+<li><p>产品使用每个节点用户的流失率。用户流失率和留存率恰好相反。如果某产品新用户的次日留存为20%，那么反过来说明有80%的用户流失了。</p>
+</li>
+<li><p>如果是网页端的产品，还有两个指标来衡量网页端活跃：</p>
+</li>
+<li><ul>
+<li>PV（Page View，页面浏览量）：用户每打开一个网页可以看作一个PV，用户看了十个网页，则PV为10。</li>
+<li>UV（Unique Visitor，独立访客数）：一定时间内访问网页的人数。</li>
+</ul>
+</li>
+</ul>
+<p><strong>第三个环节是提高留存（Retention）：用户会回来吗？</strong></p>
+<p>在第二个环节用户终于被激活唤醒了，这时候你的任务就变成了如何让用户变成回头客。留存的核心目标是让用户养成使用习惯。在这个阶段，你要明白习惯是如何形成的。</p>
+<p><strong>【需要关注的指标】</strong></p>
+<ul>
+<li>次日留存率：（当天新增的用户中，在第2天使用过产品的用户数）/第一天新增总用户数</li>
+<li>第3日留存率：（第一天新增用户中，在第3天使用过产品的用户数）/第一天新增总用户数</li>
+<li>第7日留存率：（第一天新增的用户中，在第7天使用过产品的用户数）/第一天新增总用户数</li>
+<li>第30日留存率：（第一天新增的用户中，在第30天使用过产品的用户数）/第一天新增总用户数</li>
+</ul>
+<p>Facebook有一个著名的40-20-10法则，即新用户次日留存率为40%，7日留存率为20%，30日留存率为10%，有这个表现的产品属于数据比较好的。</p>
+<p><strong>第四个环节是增加收入（Revenue ）：如何赚到更多钱？</strong></p>
+<p>完成了上面所有的步骤，终于来到最有挑战性的一关，那就是如何从用户身上获得真正的收益。比如让用户续订、创造更多的广告位等等。</p>
+<p>虽然商业模式不同，变现的方式不同，但是有一个概念需要重视，那就是夹点（pinch point），它指的是损失潜在收益的地方。</p>
+<p>对于电商企业来说，用户从挑选商品到完成购买之间是一个危险区，很多人中途会放弃购买。要评估这些常见夹点，分析用户在这些点放弃的原因。</p>
+<p><strong>【需要关注的指标】</strong></p>
+<p>这里我们要注意“<strong>用户</strong>”和“<strong>付费用户</strong>”的区分，这也将影响收入的计算。（下面提到的“用户”，如果没有特别说明是“付费用户”，那么就是值全部用户（包括付费用户和非付费用户））</p>
+<ul>
+<li>客单价：每位用户平均购买商品的金额。客单价=销售总额/顾客总数</li>
+<li>PUR(Pay User Rate)：付费用户占比</li>
+<li>ARPPU(Average Revenue Per Paying User)：某段时间内，付费用户的平均收入（不包括未付费的用户）。ARPPU=总收入/付费用户数</li>
+<li>生命周期价值(LTV，Lift Time Value)：，即平均一个用户在首次登录游戏到最后一次登录游戏内，为该游戏创造的收入总计。常用于游戏行业。</li>
+<li>复购率：一定时间内，消费两次以上的用户数 / 总购买用户数。比如有10个用户购买了产品，5个用户产生了重复购买，则重复购买率=5个重复购买用户数 / 10（总购买用户数=50%</li>
+<li>销售额=用户数<em>转化率</em>客单价*购买频率（指消费者或用户在一定时期内购买某种或某类商品的次数。）</li>
+</ul>
+<p><strong>第五个环节推荐（Refer病毒式营销）： 用户会告诉其他人吗？</strong></p>
+<p>引爆一种流行病不只有一种途径，流行病爆发需要三个条件：</p>
+<p><strong>1）传染物本身</strong></p>
+<p>传染物本身是说要对自己的产品有足够的了解。试着问自己一个问题：我的产品是否真正解决了用户的痛点？</p>
+<p>如果你是写文章的，就要考虑你的文章能为用户带来哪些真正的价值。如果你是做餐饮的，你的菜品是否真的为用户所喜欢。</p>
+<p><strong>2）传染物发挥作用所需的环境</strong></p>
+<p>也就是你的用户在哪里？对应我们前面讲的AARRR模型第一关环节（获取用户）。要去思考使用你产品的刚需用户经常在哪些环境（社区，大学等等渠道）中出现。</p>
+<p><strong>3）人们传播传染物的行为</strong></p>
+<p>在对自己的产品有了深刻洞察，同时找到你的目标人群后，还要考虑到人们会因为什么目的去分享你的产品，让更多的人看到你的产品。这个条件对应的就是AARRR模型第五个环节（推荐，病毒式营销）。</p>
+<p><strong>【需要关注的指标】</strong></p>
+<ul>
+<li><strong>转发率</strong>：某功能中，转发用户数 / 看到该功能的用户数。比如我的微信公众号（猴子聊人物）推送一篇文章给3万用户，转发这篇文章的用户数是3000，那么转发率=3000（转发这篇文章的用户数） / 3万（看到这篇文章的用户数）=10 %</li>
+<li><strong>转化率</strong>：计算方法与具体业务场景有关。<ul>
+<li>比如淘宝转化率=某段时间内产生购买行为的客户人数 / 所有到达店铺的访客人数，假如双11当天，有100个用户看到了你店铺的推广信息，被吸引进入店铺，最后有10个人购买了店铺里的东西，那么转化率=10（产生购买行为的客户人数） /100（ 所有到达店铺的访客人数）=10%</li>
+<li>广告转化率=点击广告进入推广网站的人数 / 看到广告的人数，比如我们经常使用百度，搜索结果里会有广告，如果有100个人看到了广告，其中有10个人点击广告进入推广网站，那么转化率=10（点击广告进入推广网站的人数） / 100（看到广告的人数）=10%</li>
+</ul>
+</li>
+<li><strong>K因子</strong>(K-factor)：用来衡量推荐的效果，即一个发起推荐的用户可以带来多少新用户。</li>
+<li><ul>
+<li>K 因子= (每个用户向他的朋友们发出的邀请的数量) * (接收到邀请的人转化为新用户的转化率)。</li>
+<li>假设平均每个用户会向20个朋友发出邀请，而平均的转化率为10%的话，K =20*10%=2。这个结果还算是不错的效果。</li>
+<li>当K›1时，用户群就会象滚雪球一样增大。如果K‹1的话，那么用户群到某个规模时就会停止通过自传播增长。</li>
+</ul>
+</li>
+</ul>
+<h2 id="十、杜邦分析法-财务管理方法论"><a href="#十、杜邦分析法-财务管理方法论" class="headerlink" title="十、杜邦分析法 - 财务管理方法论"></a>十、杜邦分析法 - 财务管理方法论</h2><p>将各种财务指标综合在一起来评价公司财务管理效果。即计算“用公司自己的钱赚取的利润率”/净资产收益率，拆解成三个指标相乘：</p>
+<p>净资产收益率=销售净利率 X 总资产周转率 X 权益乘数</p>
+<p>1）公司业务是否赚钱？</p>
+<p>销售净利润=净利润/销售额，衡量公司业务是否赚钱。</p>
+<p>2）公司资产运营效率如何？</p>
+<p>总资产周转率=销售额/总资产，衡量公司资产运营效率如何。</p>
+<p>3）公司债务负担有没有风险？</p>
+<p>权益乘数=总资产/净资产，也叫做杠杆率，衡量公司负债经营的情况。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-d2a618a11092235b01744bf730153743_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://pic4.zhimg.com/80/v2-fc6d7cf653395240667969627e77f0d7_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="十一、基于用户生命周期的分析体系（用户画像）"><a href="#十一、基于用户生命周期的分析体系（用户画像）" class="headerlink" title="十一、基于用户生命周期的分析体系（用户画像）"></a>十一<strong>、基于用户生命周期的分析体系</strong>（用户画像）</h2><p>用户生命周期衍生于“客户生命周期”的概念。</p>
+<p>用户从不同角度有不同的分类法：</p>
+<p>比如从用户活跃度来看，可以分为僵尸用户、低频用户、活跃用户和深度用户</p>
+<p>从用户对平台的价值来看，可能分法就变成了种子用户、普通用户、核心用户。</p>
+<p>从用户价值来看，分为无效用户、潜在用户、跟进用户、成单用户。</p>
+<p>不同的行业有不同的分类，不同的分类也有不同的运营策略。而从用户生命周期的角度来解析和管理用户，是常见的数据分析方式之一。</p>
+<p>举例从用户活跃度来看，可能就要构建一个用户活跃度模型：</p>
+<ul>
+<li>流失用户：有一段时间没有再打开产品(曾经打开过产品），那么我们就视为流失用户，根据产品的属性，可以按30天，60天，90天等划分。</li>
+<li>不活跃用户：有一段时间没有打开产品，为了和流失区分开来，需要选择无交集的时间范围。比如流失用户是60天以上没打开产品，那么不活跃则是0～60天没打开。</li>
+<li>回流用户：有一段时间没用产品，之后突然回来再次使用，则称为回流用户。回流用户是活跃用户，且是由流失用户或不活跃用户唤回而来。</li>
+<li>活跃用户：一段时间内打开过产品。</li>
+<li>忠诚用户：也可以叫超级活跃用户，长期持续使用产品，比如连续四周，或者一个月内15天等</li>
+</ul>
+<p>用户活跃可以简化为一个最简单的公式：新增用户的数量要大于流失用户的增加量。不同业务情况需要各自衡量，怎么去构建这个模型。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-b827ff123130d09e3af9d5c6dac4e49b_1440w.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h2 id="十二、SWOT"><a href="#十二、SWOT" class="headerlink" title="十二、SWOT"></a>十二、SWOT</h2><p><strong>如果外部的机会正好是你的优势，赶紧利用起来。</strong></p>
+<p>而这个利用方法，就被称为“机会优势战略”（OS）</p>
+<p><strong>外部的机会但是是你的劣势，你就需要改进。</strong></p>
+<p>那么这个改进方法，就被称为“机会劣势战略”（OW）</p>
+<p><strong>你具有优势但是外部存在威胁，那就需要时刻盯梢、保持警惕。</strong></p>
+<p>而如何监视、监视哪些？就被称为“优势威胁战略”（ST）</p>
+<p><strong>既是威胁又是你的劣势，请及时逃离并消除。</strong></p>
+<p>这个消除方法，就是“威胁劣势战略”（TW）</p>
+<hr>
+<p>举两个简单的分析例子。</p>
+<p><strong>个人求职案例</strong></p>
+<p>近几年大数据/数据分析很火（O），毕业于统计学专业（S）的你可以<strong>利用自己的特长，走向风口行业，做一名数据分析师</strong>（OS）。但你发现，成为一名数据分析时并不容易，还需要懂得R语言、SQL等数据库知识，而你没有学过（W），于是你<strong>报了学习班，努力掌握数据分析技能（OW）</strong>。到了投递简历、面试的时候，你发现竞争非常激烈（T），你仔细反思了一下自己的现状：对统计学的深刻认识、精通是特长，但数据分析应用经验有些薄弱。于是，<strong>在几轮面试中，不断观察面试官反馈及时调整（ST）、扬长避短（TW）</strong>，成功收到自己满意的offer。</p>
+<p>转化成SWOT分析模型，这个人的求职竞争力分析：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-4236165f3b5f21c4c28e566ab9add6d6_1440w.jpg?source=1940ef5c" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>企业转型案例</strong></p>
+<p>一家传统的制造业企业，面对<strong>近些年来互联网的不断冲击，眼见着竞争对手一个个都进行了信息化数字化转型，收效良好（T）</strong>，而自己虽然拥有行业领先的技术（S），和因为过硬的技术而紧密结合的一批客户、供应商，但由于过于传统的管理运作方式，效率渐渐跟不上上下游的需求（W），在进出货上有些力不从心。于是，企业决定<strong>继续开发技术优势，加深上下游的合作（OS）</strong>，同时要改进现阶段的管理模式，<strong>打探同行的信息化策略（ST）</strong>、<strong>学习他们的转型经验（WT）</strong>，自己尝试<strong>摸索适合自己的信息化模式，从而提速降本，满足上下游需求（OW）</strong>。</p>
+<p>转化为SWOT分析模型图，为：</p>
+<p><img src="https://pic2.zhimg.com/50/v2-94468148d36fea8ce7679f9c89315898_hd.jpg?source=1940ef5c" srcset="/img/loading.gif" lazyload alt="img"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/data-analysis/">data_analysis</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E8%AE%BA/">数据分析方法论</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/07/%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9E%8B%20%20%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0/">
+                        <span class="hidden-mobile">模型评估</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
